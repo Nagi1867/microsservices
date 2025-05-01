@@ -3,10 +3,7 @@ package com.example.microsservices.controllers;
 import com.example.microsservices.model.Person;
 import com.example.microsservices.services.PersonServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +21,20 @@ public class PersonController {
     @GetMapping(value = "/{id}")
     public Person findById(@PathVariable(value = "id") String id) throws Exception {
         return service.findById(id);
+    }
+
+    @PostMapping
+    public Person create(@RequestBody Person person) {
+        return service.create(person);
+    }
+
+    @PutMapping
+    public Person update(@RequestBody Person person) {
+        return service.create(person);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void delete(@PathVariable String id) {
+        service.delete(id);
     }
 }
