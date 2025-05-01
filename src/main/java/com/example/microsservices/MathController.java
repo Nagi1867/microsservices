@@ -1,5 +1,6 @@
 package com.example.microsservices;
 
+import com.example.microsservices.exceptions.UnsupportedMathOperationException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.atomic.AtomicLong;
@@ -12,9 +13,49 @@ public class MathController {
     @GetMapping(value = "/sum/{numberOne}/{numberTwo}")
     public Double sum(@PathVariable(value = "numberOne") String numberOne, @PathVariable(value = "numberTwo") String numberTwo) throws Exception{
         if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
-            throw new Exception();
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
         }
         return convertToDouble(numberOne) + convertToDouble(numberTwo);
+    }
+
+    @GetMapping(value = "/minus/{numberOne}/{numberTwo}")
+    public Double minus(@PathVariable(value = "numberOne") String numberOne, @PathVariable(value = "numberTwo") String numberTwo) throws Exception{
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        }
+        return convertToDouble(numberOne) - convertToDouble(numberTwo);
+    }
+
+    @GetMapping(value = "/mult/{numberOne}/{numberTwo}")
+    public Double multiplication(@PathVariable(value = "numberOne") String numberOne, @PathVariable(value = "numberTwo") String numberTwo) throws Exception{
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        }
+        return convertToDouble(numberOne) * convertToDouble(numberTwo);
+    }
+
+    @GetMapping(value = "/div/{numberOne}/{numberTwo}")
+    public Double division(@PathVariable(value = "numberOne") String numberOne, @PathVariable(value = "numberTwo") String numberTwo) throws Exception{
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        }
+        return convertToDouble(numberOne) / convertToDouble(numberTwo);
+    }
+
+    @GetMapping(value = "/media/{numberOne}/{numberTwo}")
+    public Double media(@PathVariable(value = "numberOne") String numberOne, @PathVariable(value = "numberTwo") String numberTwo) throws Exception{
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        }
+        return (convertToDouble(numberOne) + convertToDouble(numberTwo)) / 2;
+    }
+
+    @GetMapping(value = "/raiz/{numberOne}")
+    public Double raiz(@PathVariable(value = "numberOne") String numberOne) throws Exception{
+        if (!isNumeric(numberOne)) {
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        }
+        return Math.sqrt(convertToDouble(numberOne));
     }
 
     private Double convertToDouble(String strNumber) {
